@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3619fb806d149fb449087b8d25635850, type: 3}
+  m_Name: Pear
+  m_EditorClassIdentifier: 
+  _foodType: 5
+  _productPrefab: {fileID: 7478941886257446179, guid: c57eb0c32d7c81d4aae202996f6d21b8, type: 3}
+  _rotation: {x: 270, y: 290, z: 0}
