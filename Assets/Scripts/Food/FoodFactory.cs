@@ -6,7 +6,7 @@ namespace Food
 {
     public class FoodFactory : IInitializable
     {
-        private readonly Vector3 CreationPosition = new Vector3(2, 0.345f, 0.170f);
+        private readonly Vector3 CreationPosition = new Vector3(2, 0.345f, 0.111f);
         private readonly Vector3 CreationRotation = new Vector3(-90, 0, 0);
 
         [Inject] private List<ProductBase> _food;
@@ -15,7 +15,10 @@ namespace Food
 
         public void Create(FoodType foodType)
         {
-            GameObject.Instantiate(_foodPairs[foodType].ProductPrefab, CreationPosition, Quaternion.Euler(_foodPairs[foodType].Rotation));
+            var product = GameObject.Instantiate(_foodPairs[foodType].ProductPrefab, 
+                                                CreationPosition, 
+                                                Quaternion.identity);
+            product.AppleModel.rotation = Quaternion.Euler(_foodPairs[foodType].Rotation);
         }
 
         public void Initialize()

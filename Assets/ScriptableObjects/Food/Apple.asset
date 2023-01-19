@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   _foodType: 0
-  _productPrefab: {fileID: 4660603968423552286, guid: 1cbec18f7997bbd44922839ff3687a69, type: 3}
+  _productPrefab: {fileID: 6136221237079878939, guid: e49479f1feb037347b8775f846718579, type: 3}
   _rotation: {x: -90, y: 0, z: 0}

@@ -21,8 +21,9 @@ namespace Food
         {
             while (isDestroyed == false)
             {
-                FoodType foodType = (FoodType)Random.Range(0, (float)FoodType.Last);
-                _foodFactory.Create(foodType);
+                //FoodType foodType = (FoodType)Random.Range(0, (float)FoodType.Last);
+                //_foodFactory.Create(foodType);
+                _foodFactory.Create(FoodType.Apple);
                 yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
             }
         }

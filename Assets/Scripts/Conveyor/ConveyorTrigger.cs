@@ -1,3 +1,4 @@
+using Food;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +22,9 @@ namespace Conveyor
                 GameObject.Destroy(other.gameObject);
                 _conveyorLinesFactory.Create();
             }
+            else if(other.transform.parent.TryGetComponent(out Product product))
+            {
+                GameObject.Destroy(product.gameObject);
+            }
         }
     }
-}
