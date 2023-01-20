@@ -8,20 +8,23 @@ namespace Architecture.Services
 {
     public class LevelGoalGeneratorService : ILevelGoalGeneratorService, IInitializable
     {
-        [SerializeField] private List<FoodType> _food;
+        private LevelGoal _levelGoal;
 
         public void Initialize()
         {
-            _food = new List<FoodType>();
-            _food.Add(FoodType.Apple);
-            _food.Add(FoodType.Banana);
-            _food.Add(FoodType.Strawberry);
+            Generate();
         }
 
-        public LevelGoal Generate()
+        public LevelGoal GetLevelGoal()
         {
-            LevelGoal levelGoal = new LevelGoal();
-            
+            return _levelGoal;
+        }
+
+        private void Generate()
+        {
+            _levelGoal = new LevelGoal();
+            _levelGoal.FoodType = (FoodType)Random.Range(0, (float)FoodType.Last);
+            _levelGoal.Count = Random.Range(1, 6);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Contexts.Scenes
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<ShowProductAddedTextService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<LevelGoalGeneratorService>().AsSingle();
         }
     }
 }

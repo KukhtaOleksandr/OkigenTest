@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043a1f10b80838648b86783804ab810c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodType: 6
+  _foodType: 2
   _model: {fileID: 3338221366372814989}
   _grabTarget: {fileID: 727773398269038042}
 --- !u!114 &4474320194836083500
