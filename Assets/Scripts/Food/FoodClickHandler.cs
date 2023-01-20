@@ -31,7 +31,6 @@ namespace Food
             if (Physics.Raycast(ray, out hit, 100, _layerMask))
             {
                 _human.GrabProduct(hit.transform);
-                //Debug.Log(hit.collider.GetComponent<Product>().FoodType);
             }
         }
     }

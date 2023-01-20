@@ -1,13 +1,13 @@
 public enum FoodType
 {
     Apple,
-    Avocado,
     Banana,
+    Strawberry,
+    Last,
+    Avocado,
     Lemon,
     Peach,
     Pear,
-    Strawberry,
-    Watermelon,
-    Last
+    Watermelon
 }
 

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3619fb806d149fb449087b8d25635850, type: 3}
   m_Name: WaterMelon
   m_EditorClassIdentifier: 
-  _foodType: 7
+  _foodType: 8
   _productPrefab: {fileID: -1396306917398740287, guid: 35fc2ea1de1ee23478d6fd1e3bace903, type: 3}
   _rotation: {x: 270, y: 250, z: 0}

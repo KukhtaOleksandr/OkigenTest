@@ -18,7 +18,7 @@ namespace Food
             var product = GameObject.Instantiate(_foodPairs[foodType].ProductPrefab, 
                                                 CreationPosition, 
                                                 Quaternion.identity);
-            product.AppleModel.rotation = Quaternion.Euler(_foodPairs[foodType].Rotation);
+            product.Model.rotation = Quaternion.Euler(_foodPairs[foodType].Rotation);
         }
 
         public void Initialize()

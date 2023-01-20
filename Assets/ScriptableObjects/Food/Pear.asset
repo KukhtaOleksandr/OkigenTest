@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3619fb806d149fb449087b8d25635850, type: 3}
   m_Name: Pear
   m_EditorClassIdentifier: 
-  _foodType: 5
+  _foodType: 7
   _productPrefab: {fileID: 7478941886257446179, guid: c57eb0c32d7c81d4aae202996f6d21b8, type: 3}
   _rotation: {x: 270, y: 290, z: 0}

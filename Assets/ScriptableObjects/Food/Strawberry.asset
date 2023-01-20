@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3619fb806d149fb449087b8d25635850, type: 3}
   m_Name: Strawberry
   m_EditorClassIdentifier: 
-  _foodType: 6
-  _productPrefab: {fileID: 1266311942805255799, guid: 13e90ed5d31de4649bce96e1ec420737, type: 3}
+  _foodType: 2
+  _productPrefab: {fileID: 1368880773692274145, guid: e32a8c08f3970d74dbf162ccdf622ea9, type: 3}
   _rotation: {x: 290, y: 0, z: 0}

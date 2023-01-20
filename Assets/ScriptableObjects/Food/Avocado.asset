@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3619fb806d149fb449087b8d25635850, type: 3}
   m_Name: Avocado
   m_EditorClassIdentifier: 
-  _foodType: 1
+  _foodType: 4
   _productPrefab: {fileID: 342689681310947493, guid: b89460cccacdbdb4cbf00679790a2b55, type: 3}
   _rotation: {x: -160, y: -180, z: 0}

@@ -44,8 +44,8 @@ namespace Animations.Human
             //_constraint.data.target = null;
             //_rigBuilder.Build();
             Product product = _target.GetComponent<Product>();
-            product.AppleModel.GetComponent<Rigidbody>().isKinematic = false;
-            product.AppleModel.GetComponent<SphereCollider>().isTrigger = false;
+            product.Model.GetComponent<Rigidbody>().isKinematic = false;
+            product.Model.GetComponent<Collider>().isTrigger = false;
         }
     }
 }
