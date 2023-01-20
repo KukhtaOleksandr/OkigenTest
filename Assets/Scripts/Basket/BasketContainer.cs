@@ -10,6 +10,7 @@ public class BasketContainer : MonoBehaviour
 {
     [Inject] private IShowProductAddedTextService showProductAddedTextService;
     [Inject] private ILevelGoalGeneratorService levelGoalGeneratorService;
+    [SerializeField] private Transform _hand;
     private List<Product> _food;
     private Product _lastProduct;
     private LevelGoal _levelGoal;
@@ -18,6 +19,11 @@ public class BasketContainer : MonoBehaviour
     {
         _food = new List<Product>();
         _levelGoal = levelGoalGeneratorService.GetLevelGoal();
+    }
+
+    void Update()
+    {
+        //transform.position = new Vector3(_hand.position.x, _hand.position.y - 0.4f, _hand.position.z);
     }
 
     void OnTriggerEnter(Collider other)

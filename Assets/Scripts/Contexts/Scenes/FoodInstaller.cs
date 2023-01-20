@@ -12,6 +12,7 @@ namespace Contexts.Scenes
         [SerializeField] private LayerMask _layerMask;
         public override void InstallBindings()
         {
+            Container.DeclareSignal<SignalFoodClicked>();
             Container.BindInstance(_camera).WhenInjectedInto<FoodClickHandler>();
             Container.BindInstance(_layerMask).WhenInjectedInto<FoodClickHandler>();
             Container.BindInstance(_food).WhenInjectedInto<FoodFactory>();

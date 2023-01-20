@@ -49,6 +49,8 @@ MonoBehaviour:
   _foodType: 0
   _model: {fileID: 2166064097343038319}
   _grabTarget: {fileID: 4254083639830828301}
+  _rigidBody: {fileID: 842778337865994764}
+  _collider: {fileID: 7969821264065505915}
 --- !u!114 &6479286781613213592
 MonoBehaviour:
   m_ObjectHideFlags: 0

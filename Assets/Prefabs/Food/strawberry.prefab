@@ -49,6 +49,8 @@ MonoBehaviour:
   _foodType: 2
   _model: {fileID: 3338221366372814989}
   _grabTarget: {fileID: 727773398269038042}
+  _rigidBody: {fileID: 7278163605718478609}
+  _collider: {fileID: 5259642015052935783}
 --- !u!114 &4474320194836083500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,5 +215,15 @@ PrefabInstance:
 --- !u!4 &3338221366372814989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4863069348827460, guid: 13e90ed5d31de4649bce96e1ec420737, type: 3}
+  m_PrefabInstance: {fileID: 3333499675034206665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &7278163605718478609 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5423393287946759896, guid: 13e90ed5d31de4649bce96e1ec420737, type: 3}
+  m_PrefabInstance: {fileID: 3333499675034206665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &5259642015052935783 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 7403065396203910062, guid: 13e90ed5d31de4649bce96e1ec420737, type: 3}
   m_PrefabInstance: {fileID: 3333499675034206665}
   m_PrefabAsset: {fileID: 0}
