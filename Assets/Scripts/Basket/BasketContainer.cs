@@ -41,11 +41,11 @@ namespace Basket
                     }
                     _food.Add(product);
                     product.transform.parent=transform;
-                    await Task.Delay(150);
-                    product.ModelRigidBody.isKinematic=true;
+                    await Task.Delay(200);
                     showProductAddedTextService.Show();
+                    product.ModelRigidBody.isKinematic=true;
                     List<Product> goalProducts = _food.Where(x => x.FoodType == _levelGoal.FoodType).ToList();
-                    if (goalProducts.Count == 1)
+                    if (goalProducts.Count == _levelGoal.Count)
                         _signalBus.Fire<SignalBasketFilledWithRightFood>();
                 }
                 _lastProduct = product;

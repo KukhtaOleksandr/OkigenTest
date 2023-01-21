@@ -12,6 +12,8 @@ namespace Human.StateMachine
     public class GrabProductState : IState
     {
         private const float Duration = 0.4f;
+        private const string GrabProductTrigger = "GrabProduct";
+        
         private TwoBoneIKConstraint _constraint;
         private Animator _animator;
         private RigBuilder _rigBuilder;
@@ -50,7 +52,7 @@ namespace Human.StateMachine
             _target = target.parent;
             _constraint.data.target = _target.GetComponent<Product>().GrabTarget;
             _rigBuilder.Build();
-            _animator.SetTrigger("GrabProduct");
+            _animator.SetTrigger(GrabProductTrigger);
         }
 
         private void OnGrabbedProduct()
@@ -63,8 +65,8 @@ namespace Human.StateMachine
             _target.transform.DOScale(0.8f, Duration);
 
             _target.transform.DOMove(basketPosition.position, Duration).OnComplete(() => OnMovedProductToBasket());
-            //_basketPositions.Remove(basketPosition);
-            //_basketPositions.Add(basketPosition);
+            _basketPositions.Remove(basketPosition);
+            _basketPositions.Add(basketPosition);
         }
 
         private void OnMovedProductToBasket()

@@ -10,14 +10,15 @@ namespace Food
         private readonly Vector3 CreationRotation = new Vector3(-90, 0, 0);
 
         [Inject] private List<ProductBase> _food;
+        [Inject] private DiContainer _container;
 
         private Dictionary<FoodType, ProductBase> _foodPairs;
 
         public void Create(FoodType foodType)
         {
-            var product = GameObject.Instantiate(_foodPairs[foodType].ProductPrefab, 
+            var product = _container.InstantiatePrefabForComponent<Product>(_foodPairs[foodType].ProductPrefab, 
                                                 CreationPosition, 
-                                                Quaternion.identity);
+                                                Quaternion.identity,null);
             product.Model.rotation = Quaternion.Euler(_foodPairs[foodType].Rotation);
         }
 

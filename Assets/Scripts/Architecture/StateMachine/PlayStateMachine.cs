@@ -14,7 +14,7 @@ namespace Architecture.StateMachine
 
         protected override void Initialize()
         {
-            ChangeState<LoadPlayModeState>();
+            ChangeState<BootStrapState>();
         }
     }
 }
