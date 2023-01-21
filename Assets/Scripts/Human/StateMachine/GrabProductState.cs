@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Basket;
 using DG.Tweening;
 using Food;
 using StateMachine.Base;
@@ -17,9 +18,11 @@ namespace Human.StateMachine
         private List<Transform> _basketPositions;
         private Transform _target;
         private SignalBus _signalBus;
+        private BasketContainer _basketContainer;
+        private Transform _human;
 
         public GrabProductState(TwoBoneIKConstraint constraint, Animator animator, RigBuilder rigBuilder,
-                                List<Transform> basketPositions, Transform target, SignalBus signalBus)
+                                List<Transform> basketPositions, Transform target, SignalBus signalBus, BasketContainer basketContainer, Transform human)
         {
             _constraint = constraint;
             _animator = animator;
@@ -27,6 +30,8 @@ namespace Human.StateMachine
             _basketPositions = basketPositions;
             _target = target;
             _signalBus = signalBus;
+            _basketContainer = basketContainer;
+            _human = human;
         }
 
         public void Enter()
@@ -69,7 +74,7 @@ namespace Human.StateMachine
             product.ModelCollider.isTrigger = false;
             _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState() 
             {
-                State = new IdleState(_animator,_signalBus,_constraint,_rigBuilder,_basketPositions,_target)
+                State = new IdleState(_animator,_signalBus,_constraint,_rigBuilder,_basketPositions,_target,_basketContainer,_human)
             });
         }
     }

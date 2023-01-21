@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Basket;
 using DG.Tweening;
 using StateMachine.Base;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Human.StateMachine
         private const string WalkFinishTrigger = "WalkFinish";
         private const int Duration = 3;
 
+        private BasketContainer _basketContainer;
         private Transform _walkTo;
         private Transform _human;
         private Animator _animator;
@@ -23,7 +25,7 @@ namespace Human.StateMachine
         private Transform _target;
 
         public WalkToConveyorState(Transform walkTo, Transform human, Animator animator, SignalBus signalBus,
-        TwoBoneIKConstraint constraint, RigBuilder rigBuilder, List<Transform> basketPositions, Transform target)
+        TwoBoneIKConstraint constraint, RigBuilder rigBuilder, List<Transform> basketPositions, Transform target, BasketContainer basketContainer)
         {
             _animator = animator;
             _human = human;
@@ -33,13 +35,13 @@ namespace Human.StateMachine
             _rigBuilder = rigBuilder;
             _basketPositions = basketPositions;
             _target = target;
+            _basketContainer = basketContainer;
         }
 
         public void Enter()
         {
             _animator.SetTrigger(WalkTrigger);
             _human.DOMove(_walkTo.position, Duration).SetEase(Ease.Linear).OnComplete(() => WalkedToConveyor());
-
         }
 
         public void Exit()
@@ -52,7 +54,8 @@ namespace Human.StateMachine
             _animator.SetTrigger(WalkFinishTrigger);
             _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState()
             {
-                State = new IdleState(_animator, _signalBus, _constraint, _rigBuilder, _basketPositions, _target)
+                State = new IdleState(_animator, _signalBus, _constraint, _rigBuilder, 
+                _basketPositions, _target, _basketContainer, _human)
             });
         }
     }

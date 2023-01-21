@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Architecture.Services.Base;
@@ -6,45 +7,49 @@ using Level;
 using UnityEngine;
 using Zenject;
 
-public class BasketContainer : MonoBehaviour
+namespace Basket
 {
-    [Inject] private IShowProductAddedTextService showProductAddedTextService;
-    [Inject] private ILevelGoalGeneratorService levelGoalGeneratorService;
-    [SerializeField] private Transform _hand;
-    private List<Product> _food;
-    private Product _lastProduct;
-    private LevelGoal _levelGoal;
-
-    void Start()
+    public class BasketContainer : MonoBehaviour
     {
-        _food = new List<Product>();
-        _levelGoal = levelGoalGeneratorService.GetLevelGoal();
-    }
+        [Inject] private IShowProductAddedTextService showProductAddedTextService;
+        [Inject] private ILevelGoalGeneratorService levelGoalGeneratorService;
+        [Inject] private SignalBus _signalBus;
+        [SerializeField] private Rigidbody _basketRigidBody;
 
-    void Update()
-    {
-        //transform.position = new Vector3(_hand.position.x, _hand.position.y - 0.4f, _hand.position.z);
-    }
+        public Rigidbody BasketRigidBody { get => _basketRigidBody; }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.parent != null)
+        private List<Product> _food;
+        private Product _lastProduct;
+        private LevelGoal _levelGoal;
+
+        void Start()
         {
-            if (other.transform.parent.TryGetComponent(out Product product))
+            _food = new List<Product>();
+            _levelGoal = levelGoalGeneratorService.GetLevelGoal();
+        }
+
+        async void OnTriggerEnter(Collider other)
+        {
+            if (other.transform.parent != null)
             {
-                foreach (var p in _food)
+                if (other.transform.parent.TryGetComponent(out Product product))
                 {
-                    if (p == product)
-                        return;
+                    foreach (var p in _food)
+                    {
+                        if (p == product)
+                            return;
+                    }
+                    _food.Add(product);
+                    product.transform.parent=transform;
+                    await Task.Delay(150);
+                    product.ModelRigidBody.isKinematic=true;
+                    showProductAddedTextService.Show();
+                    List<Product> goalProducts = _food.Where(x => x.FoodType == _levelGoal.FoodType).ToList();
+                    if (goalProducts.Count == 1)
+                        _signalBus.Fire<SignalBasketFilledWithRightFood>();
                 }
-                _food.Add(product);
-                showProductAddedTextService.Show();
-                List<Product> goalProducts = _food.Where(x => x.FoodType == _levelGoal.FoodType).ToList();
-                if (goalProducts.Count == _food.Count)
-                    Debug.Log("WIN!!!");
+                _lastProduct = product;
             }
-            _lastProduct = product;
         }
     }
 }
-
