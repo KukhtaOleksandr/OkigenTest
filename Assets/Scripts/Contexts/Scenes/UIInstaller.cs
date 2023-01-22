@@ -11,14 +11,17 @@ namespace Contexts.Scenes
         [SerializeField] private Color _rightColor;
         [SerializeField] private Color _wrongColor;
         [SerializeField] private WinPanelUI _winPanelUI;
+        [SerializeField] private LoosePanelUI _loosePanelUI;
         [SerializeField] private TextMeshProUGUI _basketTextPrefab;
         [SerializeField] private Canvas _basketCanvas;
         public override void InstallBindings()
         {
             Container.DeclareSignal<SignalNextLevelBtnClicked>();
+            Container.DeclareSignal<SignalRestartBtnClicked>();
             Container.BindInstance(_basketTextPrefab).WhenInjectedInto<ShowProductAddedTextService>();
             Container.BindInstance(_basketCanvas).WhenInjectedInto<ShowProductAddedTextService>();
             Container.BindInstance(_winPanelUI);
+            Container.BindInstance(_loosePanelUI);
             Container.BindInstance(_rightColor).WithId("RightColor").WhenInjectedInto<ShowProductAddedTextService>();
             Container.BindInstance(_wrongColor).WithId("WrongColor").WhenInjectedInto<ShowProductAddedTextService>();
         }

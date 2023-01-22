@@ -1,14 +1,9 @@
-using Lean.Gui;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
 public class WinPanelUI : MonoBehaviour
 {
-    [SerializeField] private LevelPassedText _levelPassedText;
-    [SerializeField] private LeanButton _nextLevelBtn;
-
     void OnEnable()
     {
         Animate();

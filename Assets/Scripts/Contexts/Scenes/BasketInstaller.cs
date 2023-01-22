@@ -8,6 +8,7 @@ namespace Contexts.Scenes
         public override void InstallBindings()
         {
             Container.DeclareSignal<SignalBasketFilledWithRightFood>();
+            Container.DeclareSignal<SignalBasketFull>();
         }
     }
 }

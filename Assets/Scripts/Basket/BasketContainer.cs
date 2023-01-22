@@ -43,16 +43,25 @@ namespace Basket
                     product.transform.parent = transform;
                     await Task.Delay(200);
 
-                    
+
+
+                    product.ModelRigidBody.isKinematic = true;
+                    List<Product> goalProducts = _food.Where(x => x.FoodType == _levelGoal.FoodType).ToList();
+                    if (_food.Count == 8 && goalProducts.Count != _levelGoal.Count)
+                    {
+                        _signalBus.Fire<SignalBasketFull>();
+                        return;
+                    }
+                    if (goalProducts.Count == _levelGoal.Count)
+                    {
+                        _signalBus.Fire<SignalBasketFilledWithRightFood>();
+                        _lastProduct = product;
+                        return;
+                    }
                     if (product.FoodType == _levelGoal.FoodType)
                         showProductAddedTextService.Show(true);
                     else
                         showProductAddedTextService.Show(false);
-                        
-                    product.ModelRigidBody.isKinematic = true;
-                    List<Product> goalProducts = _food.Where(x => x.FoodType == _levelGoal.FoodType).ToList();
-                    if (goalProducts.Count == _levelGoal.Count)
-                        _signalBus.Fire<SignalBasketFilledWithRightFood>();
                 }
                 _lastProduct = product;
             }

@@ -26,7 +26,7 @@ namespace Human.StateMachine
 
         public GrabProductState(TwoBoneIKConstraint constraint, Animator animator, RigBuilder rigBuilder,
                                 List<Transform> basketPositions, Transform target, SignalBus signalBus, BasketContainer basketContainer,
-                                 Transform human, MultiAimConstraint bodyConstraint)
+                                Transform human, MultiAimConstraint bodyConstraint)
         {
             _constraint = constraint;
             _animator = animator;
@@ -52,15 +52,26 @@ namespace Human.StateMachine
 
         public void GrabProduct(Transform target)
         {
-            _target = target.parent;
-            _constraint.data.target = _target.GetComponent<Product>().GrabTarget;
+            if (CanGrabProduct(target.position, _constraint.data.tip.position))
+            {
+                _target = target.parent;
+                _constraint.data.target = _target.GetComponent<Product>().GrabTarget;
 
-            var data = _bodyConstraint.data.sourceObjects;
-            data.SetTransform(0, _target.GetComponent<Product>().GrabTarget);
-            _bodyConstraint.data.sourceObjects = data;
+                var data = _bodyConstraint.data.sourceObjects;
+                data.SetTransform(0, _target.GetComponent<Product>().GrabTarget);
+                _bodyConstraint.data.sourceObjects = data;
 
-            _rigBuilder.Build();
-            _animator.SetTrigger(GrabProductTrigger);
+                _rigBuilder.Build();
+                _animator.SetTrigger(GrabProductTrigger);
+            }
+            else
+            {
+                _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState()
+                {
+                    State = new IdleState(_animator, _signalBus, _constraint, _rigBuilder, _basketPositions, _target, 
+                    _basketContainer, _human, _bodyConstraint)
+                });
+            }
         }
 
         private void OnGrabbedProduct()
@@ -86,6 +97,12 @@ namespace Human.StateMachine
             {
                 State = new IdleState(_animator, _signalBus, _constraint, _rigBuilder, _basketPositions, _target, _basketContainer, _human, _bodyConstraint)
             });
+        }
+
+        private bool CanGrabProduct(Vector3 target, Vector3 hand)
+        {
+            Vector3 direction = target - hand;
+            return direction.x > -0.3f;
         }
     }
 }

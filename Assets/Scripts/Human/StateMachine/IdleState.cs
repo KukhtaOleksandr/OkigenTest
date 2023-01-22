@@ -38,12 +38,14 @@ namespace Human.StateMachine
         {
             _signalBus.Subscribe<SignalFoodClicked>(OnSignalFoodClicked);
             _signalBus.Subscribe<SignalBasketFilledWithRightFood>(OnBasketFilledWithRightFood);
+            _signalBus.Subscribe<SignalBasketFull>(OnBasketFilled);
         }
 
         public void Exit()
         {
             _signalBus.Unsubscribe<SignalFoodClicked>(OnSignalFoodClicked);
             _signalBus.Unsubscribe<SignalBasketFilledWithRightFood>(OnBasketFilledWithRightFood);
+            _signalBus.Unsubscribe<SignalBasketFull>(OnBasketFilled);
         }
 
         private void OnBasketFilledWithRightFood()
@@ -51,6 +53,13 @@ namespace Human.StateMachine
             _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState()
             {
                 State = new DanceState(_basketContainer, _human, _animator)
+            });
+        }
+        private void OnBasketFilled()
+        {
+            _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState()
+            {
+                State = new DefeatState(_basketContainer, _human, _animator)
             });
         }
 

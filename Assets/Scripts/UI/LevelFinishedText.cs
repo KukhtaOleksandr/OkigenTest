@@ -2,7 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class LevelPassedText : MonoBehaviour
+public class LevelFinishedText : MonoBehaviour
 {
     private const int StartYPosition = 150;
     private const int EndYPosition = -212;
