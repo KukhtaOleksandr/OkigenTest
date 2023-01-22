@@ -14,7 +14,7 @@ namespace Contexts.Scenes
         public override void InstallBindings()
         {
             Container.DeclareSignal<SignalFoodClicked>();
-            Container.BindInstance(_camera).WhenInjectedInto<FoodClickHandler>();
+            Container.BindInstance(_camera);
             Container.BindInstance(_layerMask).WhenInjectedInto<FoodClickHandler>();
             Container.BindInstance(_food).WhenInjectedInto<FoodFactory>();
             Container.BindInstance(_foodSpawner);

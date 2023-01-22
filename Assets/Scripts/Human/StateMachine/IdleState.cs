@@ -14,13 +14,15 @@ namespace Human.StateMachine
         private BasketContainer _basketContainer;
         private SignalBus _signalBus;
         private TwoBoneIKConstraint _constraint;
+        private MultiAimConstraint _bodyConstraint;
         private RigBuilder _rigBuilder;
         private List<Transform> _basketPositions;
         private Transform _target;
         private Transform _human;
 
         public IdleState(Animator animator, SignalBus signalBus, TwoBoneIKConstraint constraint,
-        RigBuilder rigBuilder, List<Transform> basketPositions, Transform target, BasketContainer basketContainer, Transform human)
+        RigBuilder rigBuilder, List<Transform> basketPositions, Transform target, BasketContainer basketContainer, Transform human, 
+        MultiAimConstraint bodyConstraint)
         {
             _animator = animator;
             _signalBus = signalBus;
@@ -30,6 +32,7 @@ namespace Human.StateMachine
             _target = target;
             _basketContainer = basketContainer;
             _human = human;
+            _bodyConstraint = bodyConstraint;
         }
         public void Enter()
         {
@@ -56,7 +59,7 @@ namespace Human.StateMachine
             _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState()
             {
                 State = new GrabProductState(_constraint, _animator, _rigBuilder, _basketPositions,
-                args.Product.parent.GetComponent<Product>().GrabTarget, _signalBus,_basketContainer,_human)
+                args.Product.parent.GetComponent<Product>().GrabTarget, _signalBus,_basketContainer,_human,_bodyConstraint)
             });
         }
     }

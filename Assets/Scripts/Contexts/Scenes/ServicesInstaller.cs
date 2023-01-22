@@ -14,6 +14,7 @@ namespace Contexts.Scenes
             
             Container.BindInterfacesAndSelfTo<ShowProductAddedTextService>().AsSingle();
             Container.BindInterfacesAndSelfTo<LevelGoalGeneratorService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SceneLoaderService>().AsSingle();
 
             Container.BindInterfacesAndSelfTo<PlayStateMachine>().AsSingle().NonLazy();
             Container.BindInitializableExecutionOrder<PlayStateMachine>(-20);

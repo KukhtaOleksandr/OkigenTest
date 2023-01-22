@@ -13,8 +13,9 @@ namespace Human.StateMachine
     {
         private const float Duration = 0.4f;
         private const string GrabProductTrigger = "GrabProduct";
-        
+
         private TwoBoneIKConstraint _constraint;
+        private MultiAimConstraint _bodyConstraint;
         private Animator _animator;
         private RigBuilder _rigBuilder;
         private List<Transform> _basketPositions;
@@ -24,7 +25,8 @@ namespace Human.StateMachine
         private Transform _human;
 
         public GrabProductState(TwoBoneIKConstraint constraint, Animator animator, RigBuilder rigBuilder,
-                                List<Transform> basketPositions, Transform target, SignalBus signalBus, BasketContainer basketContainer, Transform human)
+                                List<Transform> basketPositions, Transform target, SignalBus signalBus, BasketContainer basketContainer,
+                                 Transform human, MultiAimConstraint bodyConstraint)
         {
             _constraint = constraint;
             _animator = animator;
@@ -34,6 +36,7 @@ namespace Human.StateMachine
             _signalBus = signalBus;
             _basketContainer = basketContainer;
             _human = human;
+            _bodyConstraint = bodyConstraint;
         }
 
         public void Enter()
@@ -51,6 +54,11 @@ namespace Human.StateMachine
         {
             _target = target.parent;
             _constraint.data.target = _target.GetComponent<Product>().GrabTarget;
+
+            var data = _bodyConstraint.data.sourceObjects;
+            data.SetTransform(0, _target.GetComponent<Product>().GrabTarget);
+            _bodyConstraint.data.sourceObjects = data;
+
             _rigBuilder.Build();
             _animator.SetTrigger(GrabProductTrigger);
         }
@@ -74,9 +82,9 @@ namespace Human.StateMachine
             Product product = _target.GetComponent<Product>();
             product.ModelRigidBody.isKinematic = false;
             product.ModelCollider.isTrigger = false;
-            _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState() 
+            _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState()
             {
-                State = new IdleState(_animator,_signalBus,_constraint,_rigBuilder,_basketPositions,_target,_basketContainer,_human)
+                State = new IdleState(_animator, _signalBus, _constraint, _rigBuilder, _basketPositions, _target, _basketContainer, _human, _bodyConstraint)
             });
         }
     }

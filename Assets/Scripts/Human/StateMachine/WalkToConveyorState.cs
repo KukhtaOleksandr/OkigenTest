@@ -20,12 +20,14 @@ namespace Human.StateMachine
         private Animator _animator;
         private SignalBus _signalBus;
         private TwoBoneIKConstraint _constraint;
+        private MultiAimConstraint _bodyConstraint;
         private RigBuilder _rigBuilder;
         private List<Transform> _basketPositions;
         private Transform _target;
 
         public WalkToConveyorState(Transform walkTo, Transform human, Animator animator, SignalBus signalBus,
-        TwoBoneIKConstraint constraint, RigBuilder rigBuilder, List<Transform> basketPositions, Transform target, BasketContainer basketContainer)
+        TwoBoneIKConstraint constraint, RigBuilder rigBuilder, List<Transform> basketPositions, Transform target, BasketContainer basketContainer,
+        MultiAimConstraint bodyConstraint)
         {
             _animator = animator;
             _human = human;
@@ -36,6 +38,7 @@ namespace Human.StateMachine
             _basketPositions = basketPositions;
             _target = target;
             _basketContainer = basketContainer;
+            _bodyConstraint = bodyConstraint;
         }
 
         public void Enter()
@@ -54,8 +57,8 @@ namespace Human.StateMachine
             _animator.SetTrigger(WalkFinishTrigger);
             _signalBus.Fire<MonoSignalChangedState>(new MonoSignalChangedState()
             {
-                State = new IdleState(_animator, _signalBus, _constraint, _rigBuilder, 
-                _basketPositions, _target, _basketContainer, _human)
+                State = new IdleState(_animator, _signalBus, _constraint, _rigBuilder,
+                _basketPositions, _target, _basketContainer, _human, _bodyConstraint)
             });
         }
     }

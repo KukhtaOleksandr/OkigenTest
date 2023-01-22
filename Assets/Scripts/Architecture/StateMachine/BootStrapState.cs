@@ -1,5 +1,7 @@
+using System.Net.Mime;
 using StateMachine.Base;
 using Zenject;
+using UnityEngine;
 
 namespace Architecture.StateMachine
 {
@@ -9,6 +11,7 @@ namespace Architecture.StateMachine
 
         public void Enter()
         {
+            Application.targetFrameRate=60;
             _signalBus.Fire<SignalChangedState>(new SignalChangedState() { State = new InPlayModeState() });
         }
 

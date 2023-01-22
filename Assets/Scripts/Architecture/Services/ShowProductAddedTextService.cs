@@ -10,12 +10,20 @@ namespace Architecture.Services
     {
         [Inject] private TextMeshProUGUI _textPrefab;
         [Inject] private Canvas _basketCanvas;
-        public void Show()
+        [Inject (Id ="RightColor")] private Color _rightColor;
+        [Inject (Id ="WrongColor")] private Color _wrongColor;
+
+        public void Show(bool isRightProduct)
         {
             Vector3 position = new Vector3(_basketCanvas.transform.position.x,
                                            _basketCanvas.transform.position.y - 0.3f,
                                            _basketCanvas.transform.position.z);
             TextMeshProUGUI text = GameObject.Instantiate(_textPrefab, position, Quaternion.identity, _basketCanvas.transform);
+            if(isRightProduct)
+                text.color=_rightColor;
+            else
+                text.color=_wrongColor;
+
             text.DOFade(1, 0.3f);
             text.transform.DOScale(new Vector3(1.2f, 0.8f, 1), 0.3f);
 

@@ -12,13 +12,14 @@ namespace Human.StateMachine
         [SerializeField] private BasketContainer _basket;
         [SerializeField] private Animator _animator;
         [SerializeField] private TwoBoneIKConstraint _constraint;
+        [SerializeField] private MultiAimConstraint _bodyConstraint;
         [SerializeField] private RigBuilder _rigBuilder;
         [SerializeField] private List<Transform> _basketPositions;
         [SerializeField] private Transform _target;
         protected override void Initialize()
         {
             ChangeState(new WalkToConveyorState(_walkTo, transform, _animator, _signalBus,
-                                                _constraint,_rigBuilder,_basketPositions,_target,_basket));
+                                                _constraint,_rigBuilder,_basketPositions,_target,_basket,_bodyConstraint));
         }
 
         public void OnGrabbedProduct()

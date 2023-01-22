@@ -2,6 +2,6 @@ namespace Architecture.Services.Base
 {
     public interface IShowProductAddedTextService
     {
-        void Show();
+        void Show(bool isRightProduct);
     }
 }
