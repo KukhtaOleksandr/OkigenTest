@@ -1,5 +1,4 @@
 using Architecture.StateMachine;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 

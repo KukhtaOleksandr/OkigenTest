@@ -30,8 +30,10 @@ namespace Human.StateMachine
         {
             _animator.SetTrigger(Dance);
             await WaitForBasketFall();
+
             _basket.transform.parent = null;
             _basket.transform.DOMove(new Vector3(-0.534f, FloorPosition, _basket.transform.position.z), Duration);
+            
             await WaitForDance();
             _human.DORotate(new Vector3(_human.rotation.x, 180, _human.rotation.z), 1);
         }

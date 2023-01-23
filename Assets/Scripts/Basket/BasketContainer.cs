@@ -11,12 +11,11 @@ namespace Basket
 {
     public class BasketContainer : MonoBehaviour
     {
-        [Inject] private IShowProductAddedTextService showProductAddedTextService;
-        [Inject] private ILevelGoalGeneratorService levelGoalGeneratorService;
+        private const int BasketCapacity = 7;
+        [Inject] private IShowProductAddedTextService _showProductAddedTextService;
+        [Inject] private ILevelGoalGeneratorService _levelGoalGeneratorService;
         [Inject] private SignalBus _signalBus;
         [SerializeField] private Rigidbody _basketRigidBody;
-
-        public Rigidbody BasketRigidBody { get => _basketRigidBody; }
 
         private List<Product> _food;
         private Product _lastProduct;
@@ -25,7 +24,7 @@ namespace Basket
         void Start()
         {
             _food = new List<Product>();
-            _levelGoal = levelGoalGeneratorService.GetLevelGoal();
+            _levelGoal = _levelGoalGeneratorService.GetLevelGoal();
         }
 
         async void OnTriggerEnter(Collider other)
@@ -39,15 +38,16 @@ namespace Basket
                         if (p == product)
                             return;
                     }
+
                     _food.Add(product);
                     product.transform.parent = transform;
                     await Task.Delay(200);
 
-
-
                     product.ModelRigidBody.isKinematic = true;
+
                     List<Product> goalProducts = _food.Where(x => x.FoodType == _levelGoal.FoodType).ToList();
-                    if (_food.Count == 8 && goalProducts.Count != _levelGoal.Count)
+
+                    if (_food.Count == BasketCapacity && goalProducts.Count != _levelGoal.Count)
                     {
                         _signalBus.Fire<SignalBasketFull>();
                         return;
@@ -58,13 +58,18 @@ namespace Basket
                         _lastProduct = product;
                         return;
                     }
-                    if (product.FoodType == _levelGoal.FoodType)
-                        showProductAddedTextService.Show(true);
+                    if (ProductsAreIdenticalType(product.FoodType, _levelGoal.FoodType))
+                        _showProductAddedTextService.Show(true);
                     else
-                        showProductAddedTextService.Show(false);
+                        _showProductAddedTextService.Show(false);
                 }
                 _lastProduct = product;
             }
+        }
+
+        private bool ProductsAreIdenticalType(FoodType product, FoodType other)
+        {
+            return product == other;
         }
     }
 }

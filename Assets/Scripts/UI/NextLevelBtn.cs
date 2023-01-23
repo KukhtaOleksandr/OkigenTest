@@ -2,12 +2,15 @@ using UI;
 using UnityEngine;
 using Zenject;
 
-public class NextLevelBtn : MonoBehaviour
+namespace UI
 {
-    [Inject] private SignalBus _signalBus;
-
-    public void OnNextLevelBtnClicked()
+    public class NextLevelBtn : MonoBehaviour
     {
-        _signalBus.Fire<SignalNextLevelBtnClicked>();
+        [Inject] private SignalBus _signalBus;
+
+        public void OnNextLevelBtnClicked()
+        {
+            _signalBus.Fire<SignalNextLevelBtnClicked>();
+        }
     }
 }

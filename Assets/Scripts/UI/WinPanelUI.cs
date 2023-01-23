@@ -2,15 +2,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class WinPanelUI : MonoBehaviour
+namespace UI
 {
-    void OnEnable()
+    public class WinPanelUI : MonoBehaviour
     {
-        Animate();
-    }
+        private const float Alpha = 0.3f;
+        private const int Duration = 1;
+        void OnEnable()
+        {
+            Animate();
+        }
 
-    public void Animate()
-    {
-        GetComponent<Image>().DOFade(0.3f, 1);
+        public void Animate()
+        {
+            GetComponent<Image>().DOFade(Alpha, Duration);
+        }
     }
 }
